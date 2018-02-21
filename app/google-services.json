@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "70878788852",
+    "firebase_url": "https://wolf-of-wharton.firebaseio.com",
+    "project_id": "wolf-of-wharton",
+    "storage_bucket": "wolf-of-wharton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70878788852:android:18ddd05f681c7195",
+        "android_client_info": {
+          "package_name": "hwk2.cis350.upenn.edu.wolfofwharton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70878788852-nm408anh0t8a11bhieqme6gua7ijheqm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hwk2.cis350.upenn.edu.wolfofwharton",
+            "certificate_hash": "a515bfa2caae05b119bdd8454c29487d7dc29682"
+          }
+        },
+        {
+          "client_id": "70878788852-sq5n034s435g12nkt3v2ved699seu4td.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJYe_yWiNqL5tGtGQ16Nlz_VYhuBMBkQg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70878788852-sq5n034s435g12nkt3v2ved699seu4td.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
