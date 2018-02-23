@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.io.*;
 
@@ -36,9 +38,21 @@ public class StockInfoScreen extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_stock_info);
+
+        httpRequest();
 
 
+
+
+
+    }
+
+    void httpRequest() {
         try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
             URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=2OKOYNBSJ899XNY9&datatype=csv");
             URLConnection conn = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -48,7 +62,8 @@ public class StockInfoScreen extends AppCompatActivity{
             while ((inputLine = in.readLine()) != null) {
                 stocksInfo.add(inputLine.split(","));
             }
-            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
             DailyInfo stock = new DailyInfo(date.parse(stocksInfo.get(0)[0]),
                     Double.valueOf(stocksInfo.get(0)[1]),
@@ -65,17 +80,17 @@ public class StockInfoScreen extends AppCompatActivity{
             TextView open = (TextView) findViewById(R.id.textView12);
             open.setText(Double.toString(stock.getOpen()));
             TextView close = (TextView) findViewById(R.id.textView7);
-            close.setText(Double.toString(stock.getOpen()));
+            close.setText(Double.toString(stock.getClose()));
             TextView high = (TextView) findViewById(R.id.textView8);
-            high.setText(Double.toString(stock.getOpen()));
+            high.setText(Double.toString(stock.getHigh()));
             TextView low = (TextView) findViewById(R.id.textView10);
-            low.setText(Double.toString(stock.getOpen()));
+            low.setText(Double.toString(stock.getLow()));
             TextView volume = (TextView) findViewById(R.id.textView9);
-            volume.setText(Double.toString(stock.getOpen()));
+            volume.setText(Double.toString(stock.getVolume()));
 
             in.close();
 
-            setContentView(R.layout.activity_stock_info);
+
         } catch (NumberFormatException e) {
             System.out.println("Date is wrong");
         } catch (ParseException e) {
@@ -85,12 +100,6 @@ public class StockInfoScreen extends AppCompatActivity{
         } catch (IOException e) {
             Log.e("tag", "error");
         }
-
-
-
-
     }
-
-
 
 }
