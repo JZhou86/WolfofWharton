@@ -37,6 +37,7 @@ public class StockInfoScreen extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         try {
             URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=2OKOYNBSJ899XNY9&datatype=csv");
             URLConnection conn = url.openConnection();
@@ -71,6 +72,10 @@ public class StockInfoScreen extends AppCompatActivity{
             low.setText(Double.toString(stock.getOpen()));
             TextView volume = (TextView) findViewById(R.id.textView9);
             volume.setText(Double.toString(stock.getOpen()));
+
+            in.close();
+
+            setContentView(R.layout.activity_stock_info);
         } catch (NumberFormatException e) {
             System.out.println("Date is wrong");
         } catch (ParseException e) {
@@ -81,7 +86,8 @@ public class StockInfoScreen extends AppCompatActivity{
             Log.e("tag", "error");
         }
 
-        in.close();
+
+
 
     }
 
