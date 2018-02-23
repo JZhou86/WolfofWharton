@@ -20,5 +20,11 @@ public class WelcomeScreen extends AppCompatActivity {
     public void signUpScreen(View view) {
         Intent intent = new Intent(this, SignUpScreen.class);
         startActivity(intent);
+
+    }
+
+    public void tickerSearchScreen(View view) {
+        Intent intent = new Intent(this, TickerSearch.class);
+        startActivity(intent);
     }
 }

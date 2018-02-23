@@ -52,6 +52,7 @@
         android:layout_height="37dp"
         android:background="@drawable/log_in"
         android:text=""
+        android:onClick="tickerSearchScreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
