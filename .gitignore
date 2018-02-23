@@ -7,3 +7,4 @@
 /build
 /captures
 .externalNativeBuild
+app/libs/alphavantage4j-1.1.jar
