@@ -79,8 +79,8 @@ public class WelcomeScreen extends AppCompatActivity {
 
     public void tickerSearchScreen(View view) {
         logIn(email.getText().toString(), password.getText().toString());
-        //Intent intent = new Intent(this, TickerSearch.class);
-       // startActivity(intent);
+        Intent intent = new Intent(this, TickerSearch.class);
+        startActivity(intent);
     }
 
     //LOG IN EXISTING USERS
