@@ -6,8 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,11 +17,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
 public class WelcomeScreen extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+    private EditText email;
+    private EditText password;
+    private String testField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +36,12 @@ public class WelcomeScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_welcome_screen);
 
-        mAuth = FirebaseAuth.getInstance();
+        this.mAuth = FirebaseAuth.getInstance();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
+
     }
 
     @Override
@@ -37,12 +50,15 @@ public class WelcomeScreen extends AppCompatActivity {
         //check if user is signed in (non-null) and update UI
         //accordingly
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        if (mAuth.getCurrentUser() != null) {
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            updateUI(currentUser);
+        }
+
     }
 
     private void updateUI(FirebaseUser user) {
-        //TO DO
+
     }
 
     //helper function to validate that the form has been filled out
@@ -61,26 +77,10 @@ public class WelcomeScreen extends AppCompatActivity {
         return validForm;
     }
 
-    //CREATE NEW USER
-    //called when new account is created by filling out the form in
-    //the sign up activity
-    public void createAccount(String email, String password) {
-        //validate email and password
-        if (!validateForm(email, password)) {
-            return;
-        }
-
-        //creates new user
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) { //sign in successful
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        }
-                    }
-                });
+    public void tickerSearchScreen(View view) {
+        logIn(email.getText().toString(), password.getText().toString());
+        //Intent intent = new Intent(this, TickerSearch.class);
+       // startActivity(intent);
     }
 
     //LOG IN EXISTING USERS
@@ -104,11 +104,7 @@ public class WelcomeScreen extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
-
-
 
 
     //transition to sign up screen when user presses sign up button
