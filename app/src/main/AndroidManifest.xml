@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpScreen" />
-        <activity android:name=".TickerSearch"></activity>
+        <activity android:name=".TickerSearch"/>
+        <activity android:name=".StockInfoScreen"></activity>
     </application>
 
 </manifest>

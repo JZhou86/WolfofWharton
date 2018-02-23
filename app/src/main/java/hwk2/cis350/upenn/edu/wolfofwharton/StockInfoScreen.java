@@ -19,18 +19,20 @@ public class StockInfoScreen extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_stock_info);
+
         String tickerInput = getIntent().getStringExtra("tickerName");
-        TextView ticker = (TextView) findViewById(R.id.textView11);
+        TextView ticker = findViewById(R.id.textView11);
         ticker.setText(tickerInput);
-        TextView open = (TextView) findViewById(R.id.textView12);
-        open.setText();
-        TextView close = (TextView) findViewById(R.id.textView7);
-        close.setText();
-        TextView high = (TextView) findViewById(R.id.textView8);
-        high.setText();
-        TextView low = (TextView) findViewById(R.id.textView10);
-        low.setText();
-        TextView volume = (TextView) findViewById(R.id.textView9);
-        volume.setText();
+        TextView open = findViewById(R.id.textView12);
+        open.setText("String 1");
+        TextView close = findViewById(R.id.textView7);
+        close.setText("String 2");
+        TextView high = findViewById(R.id.textView8);
+        high.setText("String 3");
+        TextView low = findViewById(R.id.textView10);
+        low.setText("String 4");
+        TextView volume = findViewById(R.id.textView9);
+        volume.setText("String 5");
     }
 }
