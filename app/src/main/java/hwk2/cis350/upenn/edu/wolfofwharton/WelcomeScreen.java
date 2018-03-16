@@ -114,8 +114,5 @@ public class WelcomeScreen extends AppCompatActivity {
 
     }
 
-    public void tickerSearchScreen(View view) {
-        Intent intent = new Intent(this, TickerSearch.class);
-        startActivity(intent);
-    }
+
 }
