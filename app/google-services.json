@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "70878788852-jcqihisih99d2rqoeg1nos7uvcmgvat4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hwk2.cis350.upenn.edu.wolfofwharton",
+            "certificate_hash": "e7cd94386aceca856f8b34fd63f17a7b10466c17"
+          }
+        },
+        {
           "client_id": "70878788852-nm408anh0t8a11bhieqme6gua7ijheqm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
