@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -30,30 +34,40 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.io.*;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by Jeffrey on 2/22/2018.
  */
 
+
+
 public class StockInfoScreen extends AppCompatActivity{
+    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_info);
 
         httpRequest();
-
-
-
-
-
     }
+
 
     void httpRequest() {
         try {
+
+            String tickerInput = getIntent().getStringExtra("tickerName");
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-            URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=2OKOYNBSJ899XNY9&datatype=csv");
+            URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + tickerInput + "&apikey=2OKOYNBSJ899XNY9&datatype=csv");
             URLConnection conn = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
@@ -74,7 +88,6 @@ public class StockInfoScreen extends AppCompatActivity{
             System.out.println(stock.getOpen());
             System.out.println(stock.getDateTime());
 
-            String tickerInput = getIntent().getStringExtra("tickerName");
             TextView ticker = (TextView) findViewById(R.id.textView11);
             ticker.setText(tickerInput);
             TextView open = (TextView) findViewById(R.id.textView12);
