@@ -41,11 +41,6 @@ public class StockInfoScreen extends AppCompatActivity{
         setContentView(R.layout.activity_stock_info);
 
         httpRequest();
-
-
-
-
-
     }
 
     void httpRequest() {
