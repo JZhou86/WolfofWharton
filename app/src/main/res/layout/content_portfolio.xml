@@ -16,48 +16,49 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="100dp"
             android:layout_alignParentRight="true" />
 
         <Button
             android:id="@+id/search"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:onClick="goToTickerSearch"
+            android:text=""
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            android:onClick="tickerSearchScreen"
-            android:text=""
-            android:layout_alignParentRight="true" />
+            android:layout_marginTop="100dp" />
         <TextView
             android:id="@+id/Earnings"
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="150dp"
             />
 
         <Button
             android:id="@+id/Graph"
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
             android:layout_height="270dp"
-            android:text="Graph"
-            android:layout_below="@+id/Earnings"/>
+            android:layout_below="@+id/Earnings"
+            android:layout_margin="20dp"
+            android:text="Earnings Graph" />
 
         <TextView
             android:id="@+id/stocksLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textSize="20dp"
-            android:layout_below="@+id/Graph"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:text="Stocks:" />
+            android:layout_below="@+id/Graph"
+            android:padding="5dp"
+            android:text="Stocks:"
+            android:textColor="#95a5a6"
+            android:textSize="14dp" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/stock1"
@@ -69,28 +70,32 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:layout_width="wrap_content"
                     android:id="@+id/stockName1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Stock Name"
-                    android:textSize="18dp"
-                    />
+                    android:textColor="#2c3e50"
+                    android:textSize="18dp" />
+
                 <TextView
                     android:id="@+id/numShare1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/stockName1"
-                    android:text="Num Shares"/>
+                    android:text="Num Shares"
+                    android:textColor="#34495e" />
+
                 <TextView
                     android:id="@+id/price1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="Current Prices"
                     android:layout_centerVertical="true"
-                    android:textSize="20dp"
-                    />
+                    android:text="Current Prices"
+                    android:textColor="#2c3e50"
+                    android:textSize="20dp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 

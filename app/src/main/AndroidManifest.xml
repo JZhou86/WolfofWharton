@@ -24,7 +24,7 @@
         <activity android:name=".StockInfoScreen" />
         <activity
             android:name=".Portfolio"
-            android:label="@string/title_activity_portfolio"
+            android:label=""
             android:theme="@style/AppTheme"></activity>
     </application>
 
