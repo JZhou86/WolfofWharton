@@ -41,19 +41,16 @@ public class StockInfoScreen extends AppCompatActivity{
         setContentView(R.layout.activity_stock_info);
 
         httpRequest();
-
-
-
-
-
     }
 
     void httpRequest() {
         try {
+            String tickerInput = getIntent().getStringExtra("tickerName");
+
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-            URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=2OKOYNBSJ899XNY9&datatype=csv");
+            URL url = new URL("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + tickerInput + "&apikey=2OKOYNBSJ899XNY9&datatype=csv");
             URLConnection conn = url.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
@@ -74,7 +71,6 @@ public class StockInfoScreen extends AppCompatActivity{
             System.out.println(stock.getOpen());
             System.out.println(stock.getDateTime());
 
-            String tickerInput = getIntent().getStringExtra("tickerName");
             TextView ticker = (TextView) findViewById(R.id.textView11);
             ticker.setText(tickerInput);
             TextView open = (TextView) findViewById(R.id.textView12);
