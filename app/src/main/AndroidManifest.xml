@@ -25,7 +25,9 @@
         <activity
             android:name=".Portfolio"
             android:label=""
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".WatchList" />
+        <activity android:name=".ForgotPasswordScreen"></activity>
     </application>
 
 </manifest>

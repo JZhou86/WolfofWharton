@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Portfolio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -73,13 +75,17 @@ public class Portfolio extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_watchlist) {
-
+            Intent intent = new Intent(this, WatchList.class);
+            startActivity(intent);
         } else if (id == R.id.nav_history) {
 
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_logout) {
             // @JENNIFER JUN : this is where you set Intent for logout functionality
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, WelcomeScreen.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

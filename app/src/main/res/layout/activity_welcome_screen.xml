@@ -67,6 +67,7 @@
         android:background="@android:color/transparent"
         android:text="FORGOT?"
         android:textSize="10sp"
+        android:onClick="forgotPasswordScreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintLeft_toLeftOf="parent"

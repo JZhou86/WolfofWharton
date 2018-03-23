@@ -106,6 +106,12 @@ public class WelcomeScreen extends AppCompatActivity {
                 });
     }
 
+    //transition to forgot password screen when user presses forgot password button
+    public void forgotPasswordScreen(View view) {
+        Intent intent = new Intent(this, ForgotPasswordScreen.class);
+        startActivity(intent);
+    }
+
 
     //transition to sign up screen when user presses sign up button
     public void signUpScreen(View view) {
