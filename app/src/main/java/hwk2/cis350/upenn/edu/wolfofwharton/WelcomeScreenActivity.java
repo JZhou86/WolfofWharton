@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -20,9 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
-public class WelcomeScreen extends AppCompatActivity {
+public class WelcomeScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private EditText email;
@@ -79,7 +76,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
     public void portfolioScreen(View view) {
         logIn(email.getText().toString(), password.getText().toString());
-        Intent intent = new Intent(this, Portfolio.class);
+        Intent intent = new Intent(this, PortfolioActivity.class);
         startActivity(intent);
     }
 
@@ -99,7 +96,7 @@ public class WelcomeScreen extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
-                            Toast.makeText(WelcomeScreen.this,
+                            Toast.makeText(WelcomeScreenActivity.this,
                                     "Log in failed", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -108,14 +105,14 @@ public class WelcomeScreen extends AppCompatActivity {
 
     //transition to forgot password screen when user presses forgot password button
     public void forgotPasswordScreen(View view) {
-        Intent intent = new Intent(this, ForgotPasswordScreen.class);
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 
 
     //transition to sign up screen when user presses sign up button
     public void signUpScreen(View view) {
-        Intent intent = new Intent(this, SignUpScreen.class);
+        Intent intent = new Intent(this, SignUpScreenActivity.class);
         startActivity(intent);
 
     }

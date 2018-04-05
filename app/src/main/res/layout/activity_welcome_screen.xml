@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/welcomescreen"
-    tools:context="hwk2.cis350.upenn.edu.wolfofwharton.WelcomeScreen">
+    tools:context="hwk2.cis350.upenn.edu.wolfofwharton.WelcomeScreenActivity">
 
     <EditText
         android:id="@+id/email"

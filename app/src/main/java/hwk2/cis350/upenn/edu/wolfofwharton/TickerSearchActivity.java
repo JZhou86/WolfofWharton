@@ -1,22 +1,17 @@
 package hwk2.cis350.upenn.edu.wolfofwharton;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class TickerSearch extends AppCompatActivity {
+public class TickerSearchActivity extends AppCompatActivity {
     private TextView tickerName;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
@@ -30,6 +25,9 @@ public class TickerSearch extends AppCompatActivity {
     }
 
     public void stockInfoScreen(View view) {
+
+        //prompt stockInfoScreen once a ticker is searched
+
         tickerName = (TextView) findViewById(R.id.tickerSearch);
         String name = tickerName.getText().toString().toUpperCase();
 
@@ -37,11 +35,13 @@ public class TickerSearch extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
+        //attach to user account
         FirebaseUser user = mAuth.getCurrentUser();
         String userID = user.getUid();
         myRef.child(userID).child(name).setValue("true");
 
-        Intent intent = new Intent(this, StockInfoScreen.class);
+        //go to stockInfoScreen activity
+        Intent intent = new Intent(this, StockInfoScreenActivity.class);
         intent.putExtra("tickerName", name);
         startActivity(intent);
     }
