@@ -9,8 +9,6 @@ import java.util.Date;
 
 public class DailyInfoActivity {
 
-    //CURRENTLY UNUSED
-
     //daily info of a stock upon retrieving httprequest()
     private final Date dateTime;
     private final double open;
@@ -53,6 +51,8 @@ public class DailyInfoActivity {
                              double adjustedClose,
                              double volume,
                              double dividendAmount) {
+
+        //information to be displayed in StockInfoScreenActivity
 
         this.dateTime = dateTime;
         this.open = open;

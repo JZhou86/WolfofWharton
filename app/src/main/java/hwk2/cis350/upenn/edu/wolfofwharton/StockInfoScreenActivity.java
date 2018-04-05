@@ -3,7 +3,10 @@ package hwk2.cis350.upenn.edu.wolfofwharton;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -21,19 +24,55 @@ import java.io.*;
 
 /**
  * Created by Jeffrey on 2/22/2018.
+ *
+ * modified by alice 04/05/2018
  */
 
 
 
 public class StockInfoScreenActivity extends AppCompatActivity{
-    
 
+    private EditText quantity;
+    private TextView dollarAmount;
+    private String priceClose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_info);
 
         httpRequest(); //ticker info should immediately be displayed on the screen upon creation
+
+         quantity = (EditText) findViewById(R.id.numberOfStocks);
+         dollarAmount = (TextView) findViewById(R.id.dollar_amount);
+
+         quantity.addTextChangedListener(new TextWatcher() {
+             @Override
+             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                 //DO NOTHING
+             }
+
+             @Override
+             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                 //DO NOTHING
+             }
+
+             @Override
+             //UPDATE DOLLAR VALUE DEPENDING ON QUANTITY OF STOCKS
+             public void afterTextChanged(Editable editable) {
+                 if (!quantity.getText().toString().equals("")) {
+                     double newAmount = 0;
+                     newAmount = Double.parseDouble(quantity.getText().toString()) *
+                             Double.parseDouble(priceClose);
+                     newAmount = Math.round(newAmount * 100.0);
+                     newAmount = newAmount / 100.0;
+                     dollarAmount.setText("$" + newAmount);
+                 } else {
+                     dollarAmount.setText("S0.00");
+                 }
+             }
+         });
+
+
     }
 
     //GET TICKER BY SENDING IN AN HTTPREQUEST
@@ -73,6 +112,7 @@ public class StockInfoScreenActivity extends AppCompatActivity{
             TextView open = (TextView) findViewById(R.id.openData);
             open.setText(Double.toString(stock.getOpen()));
             TextView close = (TextView) findViewById(R.id.closeData);
+            priceClose = Double.toString(stock.getClose());
             close.setText(Double.toString(stock.getClose()));
             TextView high = (TextView) findViewById(R.id.highData);
             high.setText(Double.toString(stock.getHigh()));
