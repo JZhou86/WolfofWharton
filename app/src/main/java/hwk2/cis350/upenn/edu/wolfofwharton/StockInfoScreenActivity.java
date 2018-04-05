@@ -32,9 +32,11 @@ import java.io.*;
 
 public class StockInfoScreenActivity extends AppCompatActivity{
 
-    private EditText quantity;
-    private TextView dollarAmount;
-    private String priceClose;
+
+    private EditText quantity; //NUMBER OF STOCKS SELECTED
+    private TextView dollarAmount; //VALUE OF STOCKS
+    private String priceClose; //STOCK PRICE USED IN CALCULATIONS
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +60,20 @@ public class StockInfoScreenActivity extends AppCompatActivity{
 
              @Override
              //UPDATE DOLLAR VALUE DEPENDING ON QUANTITY OF STOCKS
+             //UPDATES REAL TIME AS YOU MODIFY TEXT FIELD
              public void afterTextChanged(Editable editable) {
                  if (!quantity.getText().toString().equals("")) {
                      double newAmount = 0;
                      newAmount = Double.parseDouble(quantity.getText().toString()) *
                              Double.parseDouble(priceClose);
+
+                     //CALCULATE THE PRICE AMOUNT (EITHER SPEND WHEN BUYING OR
+                     //GAIN FROM SELLING)
                      newAmount = Math.round(newAmount * 100.0);
                      newAmount = newAmount / 100.0;
                      dollarAmount.setText("$" + newAmount);
                  } else {
+                     //IF THERE IS NO QUANTITY SPECIFIED
                      dollarAmount.setText("S0.00");
                  }
              }
