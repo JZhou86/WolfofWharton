@@ -23,12 +23,16 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import org.w3c.dom.Text;
+
 public class PortfolioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static PortfolioActivity instance;
 
-    static RelativeLayout mRelativeLayout;
+    private static RelativeLayout mRelativeLayout;
     private static Context mContext;
+    private boolean bought;
+    private View contentPort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +63,20 @@ public class PortfolioActivity extends AppCompatActivity
         });
         graph.addSeries(series);
 
+        Bundle bundle = getIntent().getExtras();
+        if(bundle == null) {
+            bought = false;
+        } else {
+            bought= bundle.getBoolean("clickedBuy");
+        }
+
         mContext = getApplicationContext();
-        View appBar = findViewById(R.id.app_bar);
-        View contentPort = appBar.findViewById(R.id.content_port);
+        View appBar = findViewById(R.id.appBar);
+        contentPort = appBar.findViewById(R.id.content_port);
         mRelativeLayout = (RelativeLayout) contentPort.findViewById(R.id.rel_layout);
+        if (bought) {
+            addStock();
+        }
     }
 
     @Override
@@ -131,9 +145,9 @@ public class PortfolioActivity extends AppCompatActivity
         return instance;
     }
 
-    public static void onClick(View view) {
+    public void addStock() {
         // Initialize a new CardView
-        CardView card = new CardView(mContext);
+        CardView card = new CardView(contentPort.getContext());
 
         // Set the CardView layoutParams
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -149,7 +163,7 @@ public class PortfolioActivity extends AppCompatActivity
         card.setContentPadding(15, 15, 15, 15);
 
         // Set a background color for CardView
-        card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
+        card.setCardBackgroundColor(Color.WHITE);
 
         // Set the CardView maximum elevation
         card.setMaxCardElevation(15);
@@ -160,9 +174,8 @@ public class PortfolioActivity extends AppCompatActivity
         // Initialize a new TextView to put in CardView
         TextView tv = new TextView(mContext);
         tv.setLayoutParams(params);
-        tv.setText("CardView\nProgrammatically");
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-        tv.setTextColor(Color.RED);
+        tv.setText("Ford\n Num Shares: 3");
+        tv.setTextColor(Color.BLACK);
 
         // Put the TextView in CardView
         card.addView(tv);

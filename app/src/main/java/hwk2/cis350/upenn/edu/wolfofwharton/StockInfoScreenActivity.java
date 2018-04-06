@@ -1,6 +1,7 @@
 package hwk2.cis350.upenn.edu.wolfofwharton;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -146,7 +147,10 @@ public class StockInfoScreenActivity extends AppCompatActivity{
     }
 
     public void buyButtonClick(View v) {
-        PortfolioActivity.onClick(v);
+        //PortfolioActivity.onClick(v);
+        Intent intent = new Intent(this, PortfolioActivity.class);
+        intent.putExtra("clickedBuy", true);
+        startActivity(intent);
     }
 
 }
