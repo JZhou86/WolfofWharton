@@ -1,7 +1,11 @@
 package hwk2.cis350.upenn.edu.wolfofwharton;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.jjoe64.graphview.GraphView;
@@ -19,6 +25,10 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class PortfolioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static PortfolioActivity instance;
+
+    RelativeLayout mRelativeLayout;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +36,8 @@ public class PortfolioActivity extends AppCompatActivity
         setContentView(R.layout.activity_portfolio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        instance = this;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,6 +59,10 @@ public class PortfolioActivity extends AppCompatActivity
         });
         graph.addSeries(series);
 
+        mContext = getApplicationContext();
+        View appBar = findViewById(R.id.app_bar);
+        View contentPort = appBar.findViewById(R.id.content_port);
+        mRelativeLayout = (RelativeLayout) contentPort.findViewById(R.id.rel_layout);
     }
 
     @Override
@@ -110,4 +126,49 @@ public class PortfolioActivity extends AppCompatActivity
         Intent intent = new Intent(this, TickerSearchActivity.class);
         startActivity(intent);
     }
+
+    public static Context getContext() {
+        return instance;
+    }
+
+    public void onClick(View view) {
+        // Initialize a new CardView
+        CardView card = new CardView(mContext);
+
+        // Set the CardView layoutParams
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        card.setLayoutParams(params);
+
+        // Set CardView corner radius
+        card.setRadius(9);
+
+        // Set cardView content padding
+        card.setContentPadding(15, 15, 15, 15);
+
+        // Set a background color for CardView
+        card.setCardBackgroundColor(Color.parseColor("#FFC6D6C3"));
+
+        // Set the CardView maximum elevation
+        card.setMaxCardElevation(15);
+
+        // Set CardView elevation
+        card.setCardElevation(9);
+
+        // Initialize a new TextView to put in CardView
+        TextView tv = new TextView(mContext);
+        tv.setLayoutParams(params);
+        tv.setText("CardView\nProgrammatically");
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+        tv.setTextColor(Color.RED);
+
+        // Put the TextView in CardView
+        card.addView(tv);
+
+        // Finally, add the CardView in root layout
+        mRelativeLayout.addView(card);
+    }
+
 }

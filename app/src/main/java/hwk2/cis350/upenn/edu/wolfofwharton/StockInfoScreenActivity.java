@@ -1,12 +1,18 @@
 package hwk2.cis350.upenn.edu.wolfofwharton;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -31,7 +37,6 @@ import java.io.*;
 
 
 public class StockInfoScreenActivity extends AppCompatActivity{
-
 
     private EditText quantity; //NUMBER OF STOCKS SELECTED
     private TextView dollarAmount; //VALUE OF STOCKS
@@ -78,8 +83,6 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                  }
              }
          });
-
-
     }
 
     //GET TICKER BY SENDING IN AN HTTPREQUEST
