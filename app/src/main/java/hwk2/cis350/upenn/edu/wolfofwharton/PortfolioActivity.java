@@ -27,8 +27,8 @@ public class PortfolioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static PortfolioActivity instance;
 
-    RelativeLayout mRelativeLayout;
-    private Context mContext;
+    static RelativeLayout mRelativeLayout;
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,7 @@ public class PortfolioActivity extends AppCompatActivity
         return instance;
     }
 
-    public void onClick(View view) {
+    public static void onClick(View view) {
         // Initialize a new CardView
         CardView card = new CardView(mContext);
 

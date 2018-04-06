@@ -246,6 +246,7 @@
         android:background="#95a5a6"
         android:elevation="0dp"
         android:text="Buy"
+        android:onClick="buyButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"

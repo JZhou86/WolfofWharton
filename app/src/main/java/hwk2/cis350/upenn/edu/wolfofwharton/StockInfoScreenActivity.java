@@ -145,4 +145,8 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         }
     }
 
+    public void buyButtonClick(View v) {
+        PortfolioActivity.onClick(v);
+    }
+
 }
