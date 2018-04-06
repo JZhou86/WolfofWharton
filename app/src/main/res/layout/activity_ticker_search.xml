@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hwk2.cis350.upenn.edu.wolfofwharton.TickerSearch">
+    tools:context="hwk2.cis350.upenn.edu.wolfofwharton.TickerSearchActivity">
 
     <EditText
         android:id="@+id/tickerSearch"

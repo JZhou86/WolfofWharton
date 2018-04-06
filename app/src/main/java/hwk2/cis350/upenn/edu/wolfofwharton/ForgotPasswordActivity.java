@@ -12,7 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ForgotPasswordScreen extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText email;
@@ -42,7 +42,7 @@ public class ForgotPasswordScreen extends AppCompatActivity {
         //final String emailAddress = "user@example.com";
 
         if(email.getText().toString().isEmpty()) {
-            Toast.makeText(ForgotPasswordScreen.this, "Please enter an email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ForgotPasswordActivity.this, "Please enter an email", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -53,11 +53,11 @@ public class ForgotPasswordScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             //Log.d(TAG, "Email sent.");
-                            Toast.makeText(ForgotPasswordScreen.this,
+                            Toast.makeText(ForgotPasswordActivity.this,
                                     "Password Reset Email Sent to " + email.getText().toString(), Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Toast.makeText(ForgotPasswordScreen.this,
+                            Toast.makeText(ForgotPasswordActivity.this,
                                     "Password Reset Email Sent to " + email.getText().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }

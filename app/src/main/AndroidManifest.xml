@@ -12,22 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeScreen">
+        <activity android:name=".WelcomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpScreen" />
-        <activity android:name=".TickerSearch" />
-        <activity android:name=".StockInfoScreen" />
+        <activity android:name=".SignUpScreenActivity" />
+        <activity android:name=".TickerSearchActivity" />
+        <activity android:name=".StockInfoScreenActivity" />
         <activity
-            android:name=".Portfolio"
+            android:name=".PortfolioActivity"
             android:label=""
             android:theme="@style/AppTheme" />
-        <activity android:name=".WatchList" />
-        <activity android:name=".ForgotPasswordScreen"></activity>
+        <activity android:name=".WatchListActivity" />
+        <activity android:name=".ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

@@ -7,7 +7,9 @@ package hwk2.cis350.upenn.edu.wolfofwharton;
 import java.util.Date;
 
 
-public class DailyInfo {
+public class DailyInfoActivity {
+
+    //daily info of a stock upon retrieving httprequest()
     private final Date dateTime;
     private final double open;
     private final double high;
@@ -18,15 +20,17 @@ public class DailyInfo {
     private final double dividendAmount;
     private final double splitCoefficient;
 
-    public DailyInfo(Date dateTime, double open,
-                     double high,
-                     double low,
-                     double close,
-                     double adjustedClose,
-                     double volume,
-                     double dividendAmount,
-                     double splitCoefficient) {
+    //constructor for each stock
+    public DailyInfoActivity(Date dateTime, double open,
+                             double high,
+                             double low,
+                             double close,
+                             double adjustedClose,
+                             double volume,
+                             double dividendAmount,
+                             double splitCoefficient) {
 
+        //initialize all relevant stock info
         this.dateTime = dateTime;
         this.open = open;
         this.high = high;
@@ -38,14 +42,17 @@ public class DailyInfo {
         this.splitCoefficient = splitCoefficient;
     }
 
-    public DailyInfo(Date dateTime,
-                     double open,
-                     double high,
-                     double low,
-                     double close,
-                     double adjustedClose,
-                     double volume,
-                     double dividendAmount) {
+    //SECOND CONSTRUCTOR
+    public DailyInfoActivity(Date dateTime,
+                             double open,
+                             double high,
+                             double low,
+                             double close,
+                             double adjustedClose,
+                             double volume,
+                             double dividendAmount) {
+
+        //information to be displayed in StockInfoScreenActivity
 
         this.dateTime = dateTime;
         this.open = open;
@@ -58,12 +65,13 @@ public class DailyInfo {
         this.splitCoefficient = 0;
     }
 
-    public DailyInfo(Date dateTime,
-                     double open,
-                     double high,
-                     double low,
-                     double close,
-                     double volume) {
+    //THIRD CONSTRUCTOR
+    public DailyInfoActivity(Date dateTime,
+                             double open,
+                             double high,
+                             double low,
+                             double close,
+                             double volume) {
 
         this.dateTime = dateTime;
         this.open = open;
@@ -75,6 +83,8 @@ public class DailyInfo {
         this.dividendAmount = 0;
         this.splitCoefficient = 0;
     }
+
+    //GETTERS AND SETTERS TO ACCESS/CHANGE VARIOUS INFO
 
     public Date getDateTime() {
         return dateTime;
@@ -103,17 +113,14 @@ public class DailyInfo {
         return adjustedClose;
 
     }
-
     public double getVolume() {
 
         return volume;
 
     }
-
     public double getDividendAmount() {
 
         return dividendAmount;
-
     }
 
     public double getSplitCoefficient() {

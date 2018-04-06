@@ -2,8 +2,6 @@ package hwk2.cis350.upenn.edu.wolfofwharton;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,8 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
-public class Portfolio extends AppCompatActivity
+public class PortfolioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -34,6 +35,18 @@ public class Portfolio extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //GRAPH PORTFOLIO
+        GraphView graph = (GraphView) findViewById(R.id.portfolioGraph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
     }
 
     @Override
@@ -75,7 +88,7 @@ public class Portfolio extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_watchlist) {
-            Intent intent = new Intent(this, WatchList.class);
+            Intent intent = new Intent(this, WatchListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_history) {
 
@@ -84,7 +97,7 @@ public class Portfolio extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             // @JENNIFER JUN : this is where you set Intent for logout functionality
             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(this, WelcomeScreen.class);
+            Intent intent = new Intent(this, WelcomeScreenActivity.class);
             startActivity(intent);
         }
 
@@ -94,7 +107,7 @@ public class Portfolio extends AppCompatActivity
     }
 
     public void goToTickerSearch(View view) {
-        Intent intent = new Intent(this, TickerSearch.class);
+        Intent intent = new Intent(this, TickerSearchActivity.class);
         startActivity(intent);
     }
 }

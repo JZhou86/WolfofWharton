@@ -10,41 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <SearchView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp"
-            android:layout_alignParentRight="true" />
+            android:layout_marginTop="100dp" />
 
         <Button
             android:id="@+id/search"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:onClick="goToTickerSearch"
-            android:text=""
             android:layout_alignParentRight="true"
-            android:background="@android:color/transparent"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="100dp"
+            android:background="@android:color/transparent"
+            android:onClick="goToTickerSearch"
+            android:text="" />
+
         <TextView
-            android:id="@+id/Earnings"
+            android:id="@+id/Portfolio"
             android:layout_width="150dp"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="150dp"
-            />
+            android:gravity="center"
+            android:text="Portfolio"/>
 
-        <Button
-            android:id="@+id/Graph"
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/portfolioGraph"
             android:layout_width="match_parent"
             android:layout_height="270dp"
-            android:layout_below="@+id/Earnings"
+            android:layout_below="@+id/Portfolio"
             android:layout_margin="20dp"
             android:text="Earnings Graph" />
 
@@ -54,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/Graph"
+            android:layout_below="@+id/portfolioGraph"
             android:padding="5dp"
             android:text="Stocks:"
             android:textColor="#95a5a6"
@@ -64,9 +67,9 @@
             android:id="@+id/stock1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:elevation="100dp"
             android:layout_below="@+id/stocksLabel"
-            >
+            android:elevation="100dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

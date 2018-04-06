@@ -7,18 +7,16 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class SignUpScreen extends AppCompatActivity {
+public class SignUpScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
@@ -89,7 +87,7 @@ public class SignUpScreen extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                            Exception e = task.getException();
-                            Toast.makeText(SignUpScreen.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpScreenActivity.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }
 
