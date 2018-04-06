@@ -1,12 +1,15 @@
 package hwk2.cis350.upenn.edu.wolfofwharton;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -32,7 +35,6 @@ import java.io.*;
 
 public class StockInfoScreenActivity extends AppCompatActivity{
 
-
     private EditText quantity; //NUMBER OF STOCKS SELECTED
     private TextView dollarAmount; //VALUE OF STOCKS
     private String priceClose; //STOCK PRICE USED IN CALCULATIONS
@@ -43,9 +45,8 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         setContentView(R.layout.activity_stock_info);
 
         httpRequest(); //ticker info should immediately be displayed on the screen upon creation
-
-         quantity = (EditText) findViewById(R.id.numberOfStocks);
-         dollarAmount = (TextView) findViewById(R.id.dollar_amount);
+        quantity = (EditText) findViewById(R.id.numberOfStocks);
+        dollarAmount = (TextView) findViewById(R.id.dollar_amount);
 
          quantity.addTextChangedListener(new TextWatcher() {
              @Override
@@ -142,4 +143,10 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         }
     }
 
+    //USER PRESSES BUY
+    public void buyOption(View view) {
+        Intent intent = new Intent( this, TransactionHistoryActivity.class );
+        intent.putExtra( "transaction", dollarAmount.getText().toString() );
+        startActivity( intent );
+    }
 }

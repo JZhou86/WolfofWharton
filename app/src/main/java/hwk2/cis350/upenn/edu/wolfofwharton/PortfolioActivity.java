@@ -91,7 +91,8 @@ public class PortfolioActivity extends AppCompatActivity
             Intent intent = new Intent(this, WatchListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_history) {
-
+            Intent intent = new Intent(this, TransactionHistoryActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_logout) {
