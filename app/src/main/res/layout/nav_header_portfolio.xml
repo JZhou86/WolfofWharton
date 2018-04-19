@@ -22,22 +22,11 @@
         android:id="@+id/welcome_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome User"
+        android:text="MENU"
         android:textAlignment="viewStart"
         android:textColor="#ecf0f1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
-    <TextView
-        android:id="@+id/portfolio_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Portfolio Value:"
-        android:textColor="#ecf0f1" />
 
-    <TextView
-        android:id="@+id/buying_power"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Buying Power:"
-        android:textColor="#ecf0f1" />
 </LinearLayout>
