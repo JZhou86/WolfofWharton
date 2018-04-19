@@ -35,7 +35,7 @@ public class TickerSearchActivity extends AppCompatActivity {
         tickerName = (TextView) findViewById(R.id.tickerSearch);
         String name = tickerName.getText().toString().toUpperCase();
 
-        mAuth = FirebaseAuth.getInstance();
+        /*mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
@@ -48,6 +48,7 @@ public class TickerSearchActivity extends AppCompatActivity {
         stockList.add(stock);
         User newUser = new User(1000, stockList);
         myRef.child("users").child(userID).setValue(newUser);
+        */
 
         //go to stockInfoScreen activity
         Intent intent = new Intent(this, StockInfoScreenActivity.class);
