@@ -15,4 +15,8 @@ public class Stock {
         this.amount = amount;
         this.originalPrice = originalPrice;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
