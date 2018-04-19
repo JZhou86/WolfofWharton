@@ -14,4 +14,19 @@ public class User {
         this.stocks = stocks;
     }
 
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
+    public double getMoneyLeft() {
+        return moneyLeft;
+    }
+
+    public void setStocks(List<Stock> s) {
+        stocks = s;
+    }
+
+    public void setMoneyLeft(double m) {
+        moneyLeft = m;
+    }
 }

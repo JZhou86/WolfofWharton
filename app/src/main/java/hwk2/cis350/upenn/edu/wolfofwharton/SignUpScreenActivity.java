@@ -14,6 +14,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SignUpScreenActivity extends AppCompatActivity {
@@ -21,6 +26,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private EditText reenterpassword;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
+
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +58,15 @@ public class SignUpScreenActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        //TODO
+        uid = user.getUid();
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        List<Stock> stockList = new ArrayList<Stock>();
+        User newUser = new User(100000, stockList);
+        myRef.child("users").child(uid).setValue(newUser);
     }
 
     //helper function to validate that the form has been filled out
@@ -93,6 +112,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
                     }
                 });
+
+
     }
 
     public void executeSignUp(View view) {

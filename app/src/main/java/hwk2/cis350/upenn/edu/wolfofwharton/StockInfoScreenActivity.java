@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -24,6 +29,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.io.*;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Jeffrey on 2/22/2018.
@@ -38,6 +47,20 @@ public class StockInfoScreenActivity extends AppCompatActivity{
     private EditText quantity; //NUMBER OF STOCKS SELECTED
     private TextView dollarAmount; //VALUE OF STOCKS
     private String priceClose; //STOCK PRICE USED IN CALCULATIONS
+    private String tickerInput;
+
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
+
+    private DatabaseReference mDatabase;
+    private User user;
+
+    private double newAmount;
+    private int amount;
+    private String userID;
+    private double originalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +96,7 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                      newAmount = Math.round(newAmount * 100.0);
                      newAmount = newAmount / 100.0;
                      dollarAmount.setText("$" + newAmount);
+
                  } else {
                      //IF THERE IS NO QUANTITY SPECIFIED
                      dollarAmount.setText("S0.00");
@@ -87,7 +111,7 @@ public class StockInfoScreenActivity extends AppCompatActivity{
     void httpRequest() {
         try {
             //pass in ticker input to find the ticker
-            String tickerInput = getIntent().getStringExtra("tickerName");
+            tickerInput = getIntent().getStringExtra("tickerName");
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
@@ -150,6 +174,77 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         Intent intent = new Intent( this, TransactionHistoryActivity.class );
         intent.putExtra( "transaction", dollarAmount.getText().toString() );
         startActivity( intent );
-        */
+
+        newAmount = 0;
+        newAmount = Double.parseDouble(quantity.getText().toString()) *
+                Double.parseDouble(priceClose);
+
+        originalPrice = Double.parseDouble(priceClose);
+        amount = Integer.parseInt(quantity.getText().toString());
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference("users");
+
+        //attach to user account
+        FirebaseUser u = mAuth.getCurrentUser();
+        userID = u.getUid();
+        Log.d("UID", userID);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User u = dataSnapshot.getValue(User.class);
+                Log.d("USER", Double.toString(u.getMoneyLeft()));
+                setUser(u);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
+        /*ValueEventListener stockListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    User u = dataSnapshot.getValue(User.class);
+                    setUser(u);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Failed to read value
+            }
+        };
+
+        myRef.addValueEventListener(stockListener);*/
+
+
+        /*Stock stock = new Stock(tickerInput, amount, originalPrice);
+        List<Stock> stockList = user.getStocks();
+        stockList.add(stock);
+        Double moneyLeft = user.getMoneyLeft() - newAmount;
+        user.setMoneyLeft(moneyLeft);
+        user.setStocks(stockList);
+        myRef.child("users").child(userID).setValue(user);*/
+    }
+
+    private void setUser(User u) {
+        user = u;
+
+        Stock stock = new Stock(tickerInput, amount, originalPrice);
+        List<Stock> stockList = user.getStocks();
+        if(stockList == null) {
+            stockList = new ArrayList<>();
+        }
+        stockList.add(stock);
+        Double moneyLeft = user.getMoneyLeft() - newAmount;
+        user.setMoneyLeft(moneyLeft);
+        user.setStocks(stockList);
+        mDatabase.child("users").child(userID).setValue(user);
     }
 }
