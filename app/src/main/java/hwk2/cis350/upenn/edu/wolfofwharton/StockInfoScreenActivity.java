@@ -170,11 +170,6 @@ public class StockInfoScreenActivity extends AppCompatActivity{
     //USER PRESSES BUY
     public void buyOption(View view) {
 
-        /*
-        Intent intent = new Intent( this, TransactionHistoryActivity.class );
-        intent.putExtra( "transaction", dollarAmount.getText().toString() );
-        startActivity( intent );
-
         newAmount = 0;
         newAmount = Double.parseDouble(quantity.getText().toString()) *
                 Double.parseDouble(priceClose);
@@ -205,6 +200,9 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                 // Failed to read value
             }
         });
+
+        Intent intent = new Intent( this, PortfolioActivity.class );
+        startActivity( intent );
 
         /*ValueEventListener stockListener = new ValueEventListener() {
             @Override
