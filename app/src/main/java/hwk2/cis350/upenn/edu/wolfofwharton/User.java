@@ -14,4 +14,8 @@ public class User {
         this.stocks = stocks;
     }
 
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
 }

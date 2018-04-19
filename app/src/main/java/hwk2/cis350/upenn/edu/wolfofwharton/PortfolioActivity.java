@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,11 +20,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.w3c.dom.Text;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class PortfolioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,13 +44,20 @@ public class PortfolioActivity extends AppCompatActivity
     private boolean bought;
     private View contentPort;
 
+    private DatabaseReference myDatabase;
+    private DatabaseReference myRef;
+    private FirebaseDatabase mFirebaseDatabase;
+    private List<Stock> userStockList;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portfolio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //myDatabase = FirebaseDatabase.getInstance().getReference();
+        //myRef = mFirebaseDatabase.getReference();
         instance = this;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -67,7 +84,7 @@ public class PortfolioActivity extends AppCompatActivity
         if(bundle == null) {
             bought = false;
         } else {
-            bought= bundle.getBoolean("clickedBuy");
+            bought = bundle.getBoolean("clickedBuy");
         }
 
         mContext = getApplicationContext();
@@ -76,6 +93,7 @@ public class PortfolioActivity extends AppCompatActivity
         mRelativeLayout = (RelativeLayout) contentPort.findViewById(R.id.rel_layout);
         if (bought) {
             addStock();
+            bought = false;
         }
     }
 
@@ -146,6 +164,25 @@ public class PortfolioActivity extends AppCompatActivity
     }
 
     public void addStock() {
+        /*
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userID = user.getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child("userID").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> dataSnapshotsChat = dataSnapshot.child("stocks").getChildren().iterator();
+
+                while (dataSnapshotsChat.hasNext()) {
+                    DataSnapshot dataSnapshotChild = dataSnapshotsChat.next();
+                    Stock s = dataSnapshotChild.getValue(Stock.class);
+                    userStockList.add(s);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+}); */
         // Initialize a new CardView
         CardView card = new CardView(contentPort.getContext());
 
@@ -174,7 +211,8 @@ public class PortfolioActivity extends AppCompatActivity
         // Initialize a new TextView to put in CardView
         TextView tv = new TextView(mContext);
         tv.setLayoutParams(params);
-        tv.setText("Ford\n Num Shares: 3");
+        tv.setText(userStockList.get(0).getName()+"\n"+userStockList.get(0).getAmount()+"\n"+
+                userStockList.get(0).getOriginalPrice());
         tv.setTextColor(Color.BLACK);
 
         // Put the TextView in CardView
