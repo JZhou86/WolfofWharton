@@ -145,8 +145,11 @@ public class StockInfoScreenActivity extends AppCompatActivity{
 
     //USER PRESSES BUY
     public void buyOption(View view) {
+
+        /*
         Intent intent = new Intent( this, TransactionHistoryActivity.class );
         intent.putExtra( "transaction", dollarAmount.getText().toString() );
         startActivity( intent );
+        */
     }
 }
