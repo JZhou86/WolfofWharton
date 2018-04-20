@@ -65,7 +65,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
         myRef = mFirebaseDatabase.getReference();
 
         List<Stock> stockList = new ArrayList<Stock>();
-        User newUser = new User(100000, stockList);
+        List<String> transactionHistory = new ArrayList<String>();
+        User newUser = new User(100000, stockList, transactionHistory);
         myRef.child("users").child(uid).setValue(newUser);
     }
 
