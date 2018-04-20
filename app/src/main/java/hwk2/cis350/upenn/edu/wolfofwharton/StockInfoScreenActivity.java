@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import java.net.*;
@@ -62,6 +63,11 @@ public class StockInfoScreenActivity extends AppCompatActivity{
     private int amount;
     private String userID;
     private double originalPrice;
+
+    //TODO: new
+    private String stockDate;
+
+    TransactionHistoryActivity transactionHistoryActivity = new TransactionHistoryActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +145,9 @@ public class StockInfoScreenActivity extends AppCompatActivity{
             System.out.println(stock.getOpen());
             System.out.println(stock.getDateTime());
 
+            //TODO: new
+            stockDate = stock.getDateTime().toString();
+
             //DISPLAY TICKER AND TICKER INFO
             TextView ticker = (TextView) findViewById(R.id.stockName);
             ticker.setText(tickerInput);
@@ -170,6 +179,9 @@ public class StockInfoScreenActivity extends AppCompatActivity{
 
     //USER PRESSES BUY
     public void buyOption(View view) {
+
+        Intent intent = new Intent(this, PortfolioActivity.class);
+        startActivity(intent);
 
         newAmount = 0;
         newAmount = Double.parseDouble(quantity.getText().toString()) *
@@ -293,12 +305,20 @@ public class StockInfoScreenActivity extends AppCompatActivity{
 
             user.setMoneyLeft(moneyLeft);
             user.setStocks(stockList);
-            mDatabase.child("users").child(userID).setValue(user);
+        List<String> transactionHistory = user.getTransactionHistory();
+        if(transactionHistory == null) {
+            transactionHistory = new ArrayList<>();
+
+        }
+        stockDate = stockDate.substring(0, 10);
+        transactionHistory.add(stockDate + ": Purchased " + amount + " shares of " + tickerInput);
+        user.setTransactionHistory(transactionHistory);
+
+        mDatabase.child("users").child(userID).setValue(user);
 
             Intent intent = new Intent( this, PortfolioActivity.class );
             startActivity( intent );
         }
-
     }
 
     private void setUserSell(User u) {
@@ -345,6 +365,16 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                 Double moneyLeft = user.getMoneyLeft() + newAmount;
                 user.setMoneyLeft(moneyLeft);
                 user.setStocks(stockList);
+
+                List<String> transactionHistory = user.getTransactionHistory();
+                if(transactionHistory == null) {
+                    transactionHistory = new ArrayList<>();
+
+                }
+                stockDate = stockDate.substring(0, 10);
+                transactionHistory.add(stockDate + ": Sold " + amount + " shares of " + tickerInput);
+                user.setTransactionHistory(transactionHistory);
+
                 mDatabase.child("users").child(userID).setValue(user);
 
                 Intent intent = new Intent( this, PortfolioActivity.class );
