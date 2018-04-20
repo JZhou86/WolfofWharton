@@ -4,8 +4,6 @@ import java.util.*;
 public class User {
     public double moneyLeft;
     public List<Stock> stocks;
-
-    //TODO: new
     public List<String> transactionHistory;
 
     public User() {
@@ -34,12 +32,10 @@ public class User {
         moneyLeft = m;
     }
 
-    //TODO: new
     public List<String> getTransactionHistory() {
         return transactionHistory;
     }
 
-    //TODO: new
     public void setTransactionHistory(List<String> s) {
         transactionHistory = s;
     }

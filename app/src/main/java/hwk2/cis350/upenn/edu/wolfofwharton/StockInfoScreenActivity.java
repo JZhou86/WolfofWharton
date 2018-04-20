@@ -253,7 +253,6 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         user.setMoneyLeft(moneyLeft);
         user.setStocks(stockList);
 
-        //TODO: add action string to the transaction history
         List<String> transactionHistory = user.getTransactionHistory();
         if(transactionHistory == null) {
             transactionHistory = new ArrayList<>();
@@ -263,7 +262,6 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         transactionHistory.add(stockDate + ": Purchased " + amount + " shares of " + tickerInput);
         user.setTransactionHistory(transactionHistory);
 
-        //TODO: update the user object in the database
         mDatabase.child("users").child(userID).setValue(user);
     }
 }
