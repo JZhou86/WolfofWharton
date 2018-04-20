@@ -170,6 +170,9 @@ public class PortfolioActivity extends AppCompatActivity
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, WelcomeScreenActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_instructions) {
+            Intent intent = new Intent(this, InstructionsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

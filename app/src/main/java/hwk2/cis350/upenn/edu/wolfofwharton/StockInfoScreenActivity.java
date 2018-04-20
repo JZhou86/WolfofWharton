@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -169,9 +170,6 @@ public class StockInfoScreenActivity extends AppCompatActivity{
 
     //USER PRESSES BUY
     public void buyOption(View view) {
-        Intent intent = new Intent( this, TransactionHistoryActivity.class );
-        intent.putExtra( "transaction", dollarAmount.getText().toString() );
-        startActivity( intent );
 
         newAmount = 0;
         newAmount = Double.parseDouble(quantity.getText().toString()) *
@@ -195,7 +193,7 @@ public class StockInfoScreenActivity extends AppCompatActivity{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User u = dataSnapshot.getValue(User.class);
                 Log.d("USER", Double.toString(u.getMoneyLeft()));
-                setUser(u);
+                setUserBuy(u);
             }
 
             @Override
@@ -203,6 +201,7 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                 // Failed to read value
             }
         });
+
 
         /*ValueEventListener stockListener = new ValueEventListener() {
             @Override
@@ -231,7 +230,50 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         myRef.child("users").child(userID).setValue(user);*/
     }
 
-    private void setUser(User u) {
+    //USER PRESSES SELL
+    public void sellOption(View view) {
+
+        newAmount = 0;
+        newAmount = Double.parseDouble(quantity.getText().toString()) *
+                Double.parseDouble(priceClose);
+
+        originalPrice = Double.parseDouble(priceClose);
+        amount = Integer.parseInt(quantity.getText().toString());
+
+        newAmount = 0;
+        newAmount = Double.parseDouble(quantity.getText().toString()) *
+                Double.parseDouble(priceClose);
+
+        originalPrice = Double.parseDouble(priceClose);
+        amount = Integer.parseInt(quantity.getText().toString());
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference("users");
+
+        //attach to user account
+        FirebaseUser u = mAuth.getCurrentUser();
+        userID = u.getUid();
+        Log.d("UID", userID);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User u = dataSnapshot.getValue(User.class);
+                Log.d("USER", Double.toString(u.getMoneyLeft()));
+                setUserSell(u);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
+    }
+
+    private void setUserBuy(User u) {
         user = u;
 
         Stock stock = new Stock(tickerInput, amount, originalPrice);
@@ -239,10 +281,60 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         if(stockList == null) {
             stockList = new ArrayList<>();
         }
-        stockList.add(stock);
+
         Double moneyLeft = user.getMoneyLeft() - newAmount;
-        user.setMoneyLeft(moneyLeft);
-        user.setStocks(stockList);
-        mDatabase.child("users").child(userID).setValue(user);
+
+        //check if there is enough money to buy
+        if (moneyLeft < 0) {
+            Toast.makeText(this,"Not enough money",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            stockList.add(stock);
+
+            user.setMoneyLeft(moneyLeft);
+            user.setStocks(stockList);
+            mDatabase.child("users").child(userID).setValue(user);
+
+            Intent intent = new Intent( this, PortfolioActivity.class );
+            startActivity( intent );
+        }
+
+    }
+
+    private void setUserSell(User u) {
+        user = u;
+
+        Stock stock = new Stock(tickerInput, amount, originalPrice);
+        List<Stock> stockList = user.getStocks();
+
+        if(stockList == null) {
+            Toast.makeText(this,"Don't own this stock",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+
+            //search for stock in the list
+            for (int i = 0; i < stockList.size(); i++) {
+                if (tickerInput.equals(stockList.get(i).getName())) {
+                    stockList.remove(i);
+                    break;
+                }
+                //reached end without finding stock
+                if (i == stockList.size() - 1) {
+                    Toast.makeText(this,"Don't own this stock",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            Double moneyLeft = user.getMoneyLeft() + newAmount;
+            user.setMoneyLeft(moneyLeft);
+            user.setStocks(stockList);
+            mDatabase.child("users").child(userID).setValue(user);
+
+        }
+
+
+
+
     }
 }
+

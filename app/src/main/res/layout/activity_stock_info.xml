@@ -169,6 +169,7 @@
         android:layout_marginTop="8dp"
         android:background="#2c3e50"
         android:text="Sell"
+        android:onClick="sellOption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.753"

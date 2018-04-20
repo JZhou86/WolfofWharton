@@ -9,12 +9,12 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="227dp"
-        android:layout_height="36dp"
-        android:background="@drawable/textfieldwelcome"
+        android:layout_width="181dp"
+        android:layout_height="38dp"
+
         android:cursorVisible="false"
-        android:gravity="center"
-        android:hint="USERNAME"
+        android:gravity="left"
+        android:hint="Username"
         android:inputType="textEmailAddress"
 
         android:maxLines="1"
@@ -30,12 +30,11 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="227dp"
-        android:layout_height="36dp"
-        android:background="@drawable/textfieldwelcome"
+        android:layout_width="181dp"
+        android:layout_height="42dp"
         android:cursorVisible="false"
-        android:gravity="center"
-        android:hint="PASSWORD"
+        android:gravity="left"
+        android:hint="Password"
         android:inputType="text"
         android:maxLines="1"
         android:textSize="12sp"
@@ -48,44 +47,33 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="225dp"
-        android:layout_height="37dp"
-        android:background="@drawable/log_in"
-        android:text=""
+        android:layout_width="174dp"
+        android:layout_height="39dp"
         android:onClick="portfolioScreen"
+        android:text="Log in"
+        android:textColor="#FFF"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.696" />
 
     <Button
         android:id="@+id/forgot"
         android:layout_width="51dp"
         android:layout_height="17dp"
         android:background="@android:color/transparent"
-        android:text="FORGOT?"
-        android:textSize="10sp"
         android:onClick="forgotPasswordScreen"
+        android:text="FORGOT?"
+        android:textColor="#808080"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.752" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="223dp"
-        android:layout_height="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865"
-        app:srcCompat="@drawable/separator" />
+        app:layout_constraintVertical_bias="0.754" />
 
     <Button
         android:id="@+id/sign_up"
