@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -29,7 +30,18 @@ public class Data {
         // CHANGE PRICE_CHANGE
         this.origPrice = stock.getPrice();
         this.currPrice = httpRequest();
-        this.priceChange = Math.round(((this.currPrice - this.origPrice) / this.origPrice) * 100);
+        this.priceChange = truncateDecimal(((this.currPrice - this.origPrice) / this.origPrice)
+                * 100, 2).doubleValue();
+    }
+
+    // For rounding numbers to hundreths place
+    private static BigDecimal truncateDecimal(double x, int numDecimals)
+    {
+        if ( x > 0) {
+            return new BigDecimal(String.valueOf(x)).setScale(numDecimals, BigDecimal.ROUND_FLOOR);
+        } else {
+            return new BigDecimal(String.valueOf(x)).setScale(numDecimals, BigDecimal.ROUND_CEILING);
+        }
     }
 
     private double httpRequest() {
@@ -56,5 +68,13 @@ public class Data {
         }
 
         return Double.valueOf(stockInfo.get(0)[4]);
+    }
+
+    public double getCurrPrice() {
+        return this.currPrice;
+    }
+
+    public int getNumShares() {
+        return this.numShares;
     }
 }

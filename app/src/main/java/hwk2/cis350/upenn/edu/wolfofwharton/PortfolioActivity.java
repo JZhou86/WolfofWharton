@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +28,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,31 +60,7 @@ public class PortfolioActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //GRAPH PORTFOLIO
-        GraphView graph = (GraphView) findViewById(R.id.portfolioGraph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-        graph.addSeries(series);
         getUser();
-/*
-        // For displaying stock cards
-        List<Data> data = fill_with_data();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        Recycler_View_Adapter adapter = new Recycler_View_Adapter(data, getApplication());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // For animating stock cards
-        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-        itemAnimator.setAddDuration(1000);
-        itemAnimator.setRemoveDuration(1000);
-        recyclerView.setItemAnimator(itemAnimator);*/
     }
 
     public void fill_with_data(User u) {
@@ -95,9 +74,18 @@ public class PortfolioActivity extends AppCompatActivity
            stocks = user.getStocks();
         }
 
+        double earnings = 0;
         for (Stock s : stocks) {
             data.add(new Data(s));
         }
+
+        //Getting user's earnings
+        for (Data d : data) {
+            earnings += (d.getNumShares() * d.getCurrPrice());
+        }
+        earnings += u.getMoneyLeft();
+        TextView userEarnings = findViewById(R.id.earnings);
+        userEarnings.setText("$" + truncateDecimal(earnings, 2));
 
         // For displaying stock cards
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -112,17 +100,15 @@ public class PortfolioActivity extends AppCompatActivity
         recyclerView.setItemAnimator(itemAnimator);
     }
 
-//    public List<Data> fill_with_data() {
-//        List<Data> data = new ArrayList<>();
-//        Stock s1 = new Stock("AAPL", 1, 160.90);
-//        data.add(new Data(s1));
-//        Stock s2 = new Stock("MSFT", 3, 92.10);
-//        data.add(new Data(s2));
-//        Stock s3 = new Stock("F", 100, 17.85);
-//        data.add(new Data(s3));
-//
-//        return data;
-//    }
+    // For rounding numbers to hundreths place
+    private static BigDecimal truncateDecimal(double x, int numDecimals)
+    {
+        if ( x > 0) {
+            return new BigDecimal(String.valueOf(x)).setScale(numDecimals, BigDecimal.ROUND_FLOOR);
+        } else {
+            return new BigDecimal(String.valueOf(x)).setScale(numDecimals, BigDecimal.ROUND_CEILING);
+        }
+    }
 
     @Override
     public void onBackPressed() {

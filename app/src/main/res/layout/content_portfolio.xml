@@ -35,22 +35,15 @@
             android:text="" />
 
         <TextView
-            android:id="@+id/Portfolio"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
+            android:id="@+id/earnings"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="150dp"
-            android:gravity="center"
-            android:text="Portfolio"/>
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/portfolioGraph"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:layout_below="@+id/Portfolio"
-            android:layout_margin="20dp"
-            android:text="Earnings Graph" />
+            android:textSize="50dp"
+            android:textColor="#ecf0f1"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/stocksLabel"
@@ -58,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/portfolioGraph"
+            android:layout_below="@+id/earnings"
             android:padding="5dp"
             android:text="STOCKS"
             android:textColor="#ecf0f1"
