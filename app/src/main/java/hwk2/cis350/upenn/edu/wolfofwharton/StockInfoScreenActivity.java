@@ -364,6 +364,16 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                 Double moneyLeft = user.getMoneyLeft() + newAmount;
                 user.setMoneyLeft(moneyLeft);
                 user.setStocks(stockList);
+
+                List<String> transactionHistory = user.getTransactionHistory();
+                if(transactionHistory == null) {
+                    transactionHistory = new ArrayList<>();
+
+                }
+                stockDate = stockDate.substring(0, 10);
+                transactionHistory.add(stockDate + ": Sold " + amount + " shares of " + tickerInput);
+                user.setTransactionHistory(transactionHistory);
+
                 mDatabase.child("users").child(userID).setValue(user);
 
                 Intent intent = new Intent( this, PortfolioActivity.class );
