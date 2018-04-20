@@ -330,9 +330,10 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                     //remove stocks
                     if (tickerInput.equals(stockList.get(i).getName())) {
                         if (temp >= stockList.get(i).getAmount()) {
-                            numStocksOwned = numStocksOwned - stockList.get(i).getAmount();
+                            //numStocksOwned = numStocksOwned - stockList.get(i).getAmount();
                             temp = temp - stockList.get(i).getAmount();
                             stockList.remove(i);
+                            i--;
                         } else {
                             //update stock number
                             stockList.get(i).setAmount(stockList.get(i).getAmount() - temp);
