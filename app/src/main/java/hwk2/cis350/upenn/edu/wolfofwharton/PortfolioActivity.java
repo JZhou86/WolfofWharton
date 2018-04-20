@@ -87,10 +87,14 @@ public class PortfolioActivity extends AppCompatActivity
     public void fill_with_data(User u) {
         user = u;
         List<Data> data = new ArrayList<Data>();
-        List<Stock> stocks = user.getStocks();
-        if (stocks == null) {
-            stocks = new ArrayList<Stock>();
+        List<Stock> stocks;
+        if (user.getStocks() == null) {
+            stocks = new ArrayList<>();
         }
+        else {
+           stocks = user.getStocks();
+        }
+
         for (Stock s : stocks) {
             data.add(new Data(s));
         }

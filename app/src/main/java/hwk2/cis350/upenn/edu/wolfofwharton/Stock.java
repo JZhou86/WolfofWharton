@@ -5,6 +5,10 @@ public class Stock {
     public int amount;
     public double originalPrice;
 
+    public Stock() {
+
+    }
+
     public Stock(String name, int amount, double originalPrice) {
         this.name = name;
         this.amount = amount;
