@@ -15,6 +15,9 @@ public class User {
     }
 
     public List<Stock> getStocks() {
+        if (stocks == null) {
+            return new ArrayList<Stock>();
+        }
         return stocks;
     }
 
