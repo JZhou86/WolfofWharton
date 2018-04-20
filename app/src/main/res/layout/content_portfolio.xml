@@ -4,13 +4,15 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:fillViewport="false">
+    android:fillViewport="false"
+    android:background="#2d3436">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#2d3436">
+        android:background="#2d3436"
+        android:orientation="vertical">
 
         <SearchView
             android:layout_width="24dp"
@@ -19,7 +21,8 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="100dp"
+            android:background="@drawable/search_bar" />
 
         <Button
             android:id="@+id/search"
@@ -32,6 +35,7 @@
             android:layout_marginTop="100dp"
             android:background="@android:color/transparent"
             android:onClick="goToTickerSearch"
+
             android:text="" />
 
         <TextView
@@ -41,9 +45,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="150dp"
-            android:textSize="50dp"
+            android:gravity="center"
             android:textColor="#ecf0f1"
-            android:gravity="center" />
+            android:textSize="50dp" />
 
         <TextView
             android:id="@+id/stocksLabel"
@@ -59,9 +63,9 @@
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recyclerview"
-            android:layout_below="@+id/stocksLabel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/stocksLabel" />
 
     </RelativeLayout>
 

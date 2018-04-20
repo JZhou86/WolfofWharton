@@ -180,39 +180,43 @@ public class StockInfoScreenActivity extends AppCompatActivity{
     //USER PRESSES BUY
     public void buyOption(View view) {
 
-        Intent intent = new Intent(this, PortfolioActivity.class);
-        startActivity(intent);
+        if (quantity.getText().toString().equals("")) {
+            Toast.makeText(this, "Enter an amount",
+                    Toast.LENGTH_SHORT).show();
+        } else {
 
-        newAmount = 0;
-        newAmount = Double.parseDouble(quantity.getText().toString()) *
-                Double.parseDouble(priceClose);
 
-        originalPrice = Double.parseDouble(priceClose);
-        amount = Integer.parseInt(quantity.getText().toString());
+            newAmount = 0;
+            newAmount = Double.parseDouble(quantity.getText().toString()) *
+                    Double.parseDouble(priceClose);
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("users");
+            originalPrice = Double.parseDouble(priceClose);
+            amount = Integer.parseInt(quantity.getText().toString());
 
-        //attach to user account
-        FirebaseUser u = mAuth.getCurrentUser();
-        userID = u.getUid();
-        Log.d("UID", userID);
+            mAuth = FirebaseAuth.getInstance();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            myRef = mFirebaseDatabase.getReference("users");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User u = dataSnapshot.getValue(User.class);
-                Log.d("USER", Double.toString(u.getMoneyLeft()));
-                setUserBuy(u);
-            }
+            //attach to user account
+            FirebaseUser u = mAuth.getCurrentUser();
+            userID = u.getUid();
+            Log.d("UID", userID);
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User u = dataSnapshot.getValue(User.class);
+                    Log.d("USER", Double.toString(u.getMoneyLeft()));
+                    setUserBuy(u);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                }
+            });
+
 
 
         /*ValueEventListener stockListener = new ValueEventListener() {
@@ -240,49 +244,56 @@ public class StockInfoScreenActivity extends AppCompatActivity{
         user.setMoneyLeft(moneyLeft);
         user.setStocks(stockList);
         myRef.child("users").child(userID).setValue(user);*/
+        }
     }
+
 
     //USER PRESSES SELL
     public void sellOption(View view) {
 
-        newAmount = 0;
-        newAmount = Double.parseDouble(quantity.getText().toString()) *
-                Double.parseDouble(priceClose);
+        if (quantity.getText().toString().equals("")) {
+            Toast.makeText(this, "Enter an amount",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            
+            newAmount = 0;
+            newAmount = Double.parseDouble(quantity.getText().toString()) *
+                    Double.parseDouble(priceClose);
 
-        originalPrice = Double.parseDouble(priceClose);
-        amount = Integer.parseInt(quantity.getText().toString());
+            originalPrice = Double.parseDouble(priceClose);
+            amount = Integer.parseInt(quantity.getText().toString());
 
-        newAmount = 0;
-        newAmount = Double.parseDouble(quantity.getText().toString()) *
-                Double.parseDouble(priceClose);
+            newAmount = 0;
+            newAmount = Double.parseDouble(quantity.getText().toString()) *
+                    Double.parseDouble(priceClose);
 
-        originalPrice = Double.parseDouble(priceClose);
-        amount = Integer.parseInt(quantity.getText().toString());
+            originalPrice = Double.parseDouble(priceClose);
+            amount = Integer.parseInt(quantity.getText().toString());
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("users");
+            mAuth = FirebaseAuth.getInstance();
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            myRef = mFirebaseDatabase.getReference("users");
 
-        //attach to user account
-        FirebaseUser u = mAuth.getCurrentUser();
-        userID = u.getUid();
-        Log.d("UID", userID);
+            //attach to user account
+            FirebaseUser u = mAuth.getCurrentUser();
+            userID = u.getUid();
+            Log.d("UID", userID);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User u = dataSnapshot.getValue(User.class);
-                Log.d("USER", Double.toString(u.getMoneyLeft()));
-                setUserSell(u);
-            }
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("users").child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User u = dataSnapshot.getValue(User.class);
+                    Log.d("USER", Double.toString(u.getMoneyLeft()));
+                    setUserSell(u);
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                }
+            });
+        }
     }
 
     private void setUserBuy(User u) {
