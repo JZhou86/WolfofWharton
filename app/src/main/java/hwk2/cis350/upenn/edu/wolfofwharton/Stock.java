@@ -15,8 +15,18 @@ public class Stock {
         this.amount = amount;
         this.originalPrice = originalPrice;
     }
-
+    //get name
     public String getName() {
         return this.name;
+    }
+
+    //get num of stocks
+    public int getAmount() {
+        return this.amount;
+    }
+
+    //set num of stocks
+    public void setAmount(int i) {
+        this.amount = i;
     }
 }

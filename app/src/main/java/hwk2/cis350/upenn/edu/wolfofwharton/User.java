@@ -29,4 +29,5 @@ public class User {
     public void setMoneyLeft(double m) {
         moneyLeft = m;
     }
+
 }

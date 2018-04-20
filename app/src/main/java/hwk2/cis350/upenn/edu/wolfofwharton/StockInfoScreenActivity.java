@@ -303,32 +303,54 @@ public class StockInfoScreenActivity extends AppCompatActivity{
 
     private void setUserSell(User u) {
         user = u;
-
+        int quantitySold = Integer.parseInt(quantity.getText().toString());
+        int numStocksOwned = 0;
+        int temp = quantitySold;
         Stock stock = new Stock(tickerInput, amount, originalPrice);
         List<Stock> stockList = user.getStocks();
 
         if(stockList == null) {
-            Toast.makeText(this,"Don't own this stock",
+            Toast.makeText(this,"Don't own this stock, no list",
                     Toast.LENGTH_SHORT).show();
         } else {
 
-            //search for stock in the list
+            //search for stocks in the list
             for (int i = 0; i < stockList.size(); i++) {
                 if (tickerInput.equals(stockList.get(i).getName())) {
-                    stockList.remove(i);
-                    break;
+                    numStocksOwned += stockList.get(i).getAmount();
                 }
-                //reached end without finding stock
-                if (i == stockList.size() - 1) {
-                    Toast.makeText(this,"Don't own this stock",
-                            Toast.LENGTH_SHORT).show();
-                }
+
             }
 
-            Double moneyLeft = user.getMoneyLeft() + newAmount;
-            user.setMoneyLeft(moneyLeft);
-            user.setStocks(stockList);
-            mDatabase.child("users").child(userID).setValue(user);
+            if (numStocksOwned < quantitySold) {
+                Toast.makeText(this,"Don't own enough of this stock",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                for (int i = 0; i < stockList.size(); i++) {
+                    //remove stocks
+                    if (tickerInput.equals(stockList.get(i).getName())) {
+                        if (temp >= stockList.get(i).getAmount()) {
+                            numStocksOwned = numStocksOwned - stockList.get(i).getAmount();
+                            temp = temp - stockList.get(i).getAmount();
+                            stockList.remove(i);
+                        } else {
+                            //update stock number
+                            stockList.get(i).setAmount(stockList.get(i).getAmount() - temp);
+
+                        }
+                    }
+                }
+
+                Double moneyLeft = user.getMoneyLeft() + newAmount;
+                user.setMoneyLeft(moneyLeft);
+                user.setStocks(stockList);
+                mDatabase.child("users").child(userID).setValue(user);
+
+                Intent intent = new Intent( this, PortfolioActivity.class );
+                startActivity( intent );
+            }
+
+
 
         }
 
