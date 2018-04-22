@@ -24,14 +24,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PortfolioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +42,7 @@ public class PortfolioActivity extends AppCompatActivity
     private DatabaseReference mDatabase;
     private User user;
     private String userID;
+    private Map<String, Stock> stockMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,16 @@ public class PortfolioActivity extends AppCompatActivity
 
         double earnings = 0;
         for (Stock s : stocks) {
-            data.add(new Data(s));
+            // For not adding new cards for same stock name after a buy
+            if (!stockMap.containsKey(s.getName())) {
+                stockMap.put(s.getName(), s);
+            } else if (stockMap.containsKey(s.getName())) {
+                Stock stockInMap = stockMap.get(s.getName());
+                int totalNumShares = stockInMap.getNumShares() + s.getNumShares();
+                stockInMap.setPrice((((stockInMap.getNumShares() * stockInMap.getPrice()) +  (s.getNumShares() * s.getPrice())) / totalNumShares));
+                stockInMap.setAmount(totalNumShares);
+            }
+            data.add(new Data(stockMap.get(s.getName())));
         }
 
         //Getting user's earnings

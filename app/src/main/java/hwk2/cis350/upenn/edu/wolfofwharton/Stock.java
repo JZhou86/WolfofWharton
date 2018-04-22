@@ -36,4 +36,6 @@ public class Stock {
     public double getPrice() {
         return this.originalPrice;
     }
+
+    public void setPrice(double price) { this.originalPrice = price; }
 }
