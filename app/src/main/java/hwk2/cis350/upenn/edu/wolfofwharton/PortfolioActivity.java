@@ -81,8 +81,10 @@ public class PortfolioActivity extends AppCompatActivity
             } else if (stockMap.containsKey(s.getName())) {
                 Stock stockInMap = stockMap.get(s.getName());
                 int totalNumShares = stockInMap.getNumShares() + s.getNumShares();
-                stockInMap.setPrice((((stockInMap.getNumShares() * stockInMap.getPrice()) +  (s.getNumShares() * s.getPrice())) / totalNumShares));
+                stockInMap.setPrice((((stockInMap.getNumShares() * stockInMap.getPrice()) + (s.getNumShares() * s.getPrice())) / totalNumShares));
                 stockInMap.setAmount(totalNumShares);
+                // Updates existing stock in map
+                stockMap.put(s.getName(), stockInMap);
             }
             data.add(new Data(stockMap.get(s.getName())));
         }
@@ -108,7 +110,7 @@ public class PortfolioActivity extends AppCompatActivity
         recyclerView.setItemAnimator(itemAnimator);
     }
 
-    // For rounding numbers to hundreths place
+    // For rounding numbers to hundredths place
     private static BigDecimal truncateDecimal(double x, int numDecimals)
     {
         if ( x > 0) {
