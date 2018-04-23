@@ -1,6 +1,7 @@
 package hwk2.cis350.upenn.edu.wolfofwharton;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
         List<String> transactionHistory = new ArrayList<String>();
         User newUser = new User(100000, stockList, transactionHistory);
         myRef.child("users").child(uid).setValue(newUser);
+        Intent intent = new Intent(this, WelcomeScreenActivity.class);
+        startActivity(intent);
     }
 
     //helper function to validate that the form has been filled out
