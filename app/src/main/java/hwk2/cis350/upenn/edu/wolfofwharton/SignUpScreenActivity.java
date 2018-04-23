@@ -51,10 +51,10 @@ public class SignUpScreenActivity extends AppCompatActivity {
         //check if user is signed in (non-null) and update UI
         //accordingly
 
-        if (mAuth.getCurrentUser() != null) {
+        /*if (mAuth.getCurrentUser() != null) {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             updateUI(currentUser);
-        }
+        }*/
 
     }
 
