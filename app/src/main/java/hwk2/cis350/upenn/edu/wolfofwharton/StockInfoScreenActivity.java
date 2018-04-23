@@ -348,7 +348,7 @@ public class StockInfoScreenActivity extends AppCompatActivity{
             //search for stocks in the list
             for (int i = 0; i < stockList.size(); i++) {
                 if (tickerInput.equals(stockList.get(i).getName())) {
-                    numStocksOwned += stockList.get(i).getAmount();
+                    numStocksOwned += stockList.get(i).getNumShares();
                 }
 
             }
@@ -360,15 +360,14 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                 for (int i = 0; i < stockList.size(); i++) {
                     //remove stocks
                     if (tickerInput.equals(stockList.get(i).getName())) {
-                        if (temp >= stockList.get(i).getAmount()) {
-                            //numStocksOwned = numStocksOwned - stockList.get(i).getAmount();
-                            temp = temp - stockList.get(i).getAmount();
+                        if (temp >= stockList.get(i).getNumShares()) {
+                            //numStocksOwned = numStocksOwned - stockList.get(i).getNumShares();
+                            temp = temp - stockList.get(i).getNumShares();
                             stockList.remove(i);
                             i--;
                         } else {
                             //update stock number
-                            stockList.get(i).setAmount(stockList.get(i).getAmount() - temp);
-
+                            stockList.get(i).setNumShares(stockList.get(i).getNumShares() - temp);
                         }
                     }
                 }
@@ -391,9 +390,6 @@ public class StockInfoScreenActivity extends AppCompatActivity{
                 Intent intent = new Intent( this, PortfolioActivity.class );
                 startActivity( intent );
             }
-
-
-
         }
 
 

@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,7 +81,7 @@ public class PortfolioActivity extends AppCompatActivity
                 Stock stockInMap = stockMap.get(s.getName());
                 int totalNumShares = stockInMap.getNumShares() + s.getNumShares();
                 stockInMap.setPrice((((stockInMap.getNumShares() * stockInMap.getPrice()) + (s.getNumShares() * s.getPrice())) / totalNumShares));
-                stockInMap.setAmount(totalNumShares);
+                stockInMap.setNumShares(totalNumShares);
                 // Updates existing stock in map
                 stockMap.put(s.getName(), stockInMap);
             }
