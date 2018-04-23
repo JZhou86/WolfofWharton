@@ -78,7 +78,7 @@ public class PortfolioActivity extends AppCompatActivity
             // For not adding new cards for same stock name after a buy
             if (!stockMap.containsKey(s.getName())) {
                 stockMap.put(s.getName(), s);
-            } else if (stockMap.containsKey(s.getName())) {
+            } else {
                 Stock stockInMap = stockMap.get(s.getName());
                 int totalNumShares = stockInMap.getNumShares() + s.getNumShares();
                 stockInMap.setPrice((((stockInMap.getNumShares() * stockInMap.getPrice()) + (s.getNumShares() * s.getPrice())) / totalNumShares));
@@ -86,7 +86,10 @@ public class PortfolioActivity extends AppCompatActivity
                 // Updates existing stock in map
                 stockMap.put(s.getName(), stockInMap);
             }
-            data.add(new Data(stockMap.get(s.getName())));
+        }
+
+        for (String stockName : stockMap.keySet()) {
+            data.add(new Data(stockMap.get(stockName)));
         }
 
         //Getting user's earnings
