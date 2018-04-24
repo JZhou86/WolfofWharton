@@ -15,6 +15,7 @@
         android:id="@+id/welcome_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:text="MAIN MENU"
         android:fontFamily="sans-serif-condensed"
         android:textStyle="bold"
@@ -23,22 +24,11 @@
         android:textSize="20sp"
         android:gravity="start" />
 
-    <TextView
-        android:id="@+id/remaining_funds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Funds Remaining: "
-        android:fontFamily="sans-serif-condensed"
-        android:textAlignment="viewStart"
-        android:textColor="#ecf0f1"
-        android:textSize="18sp"
-        android:gravity="start" />
-
     <ImageView
         android:id="@+id/imageWolf"
-        android:layout_marginTop="25dp"
         android:layout_width="61dp"
         android:layout_height="65dp"
+        android:layout_marginTop="25dp"
         app:srcCompat="@drawable/wolf" />
 
 </LinearLayout>
