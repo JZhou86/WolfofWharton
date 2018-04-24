@@ -148,6 +148,8 @@ public class PortfolioActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, TickerSearchActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -166,8 +168,6 @@ public class PortfolioActivity extends AppCompatActivity
         } else if (id == R.id.nav_history) {
             Intent intent = new Intent(this, TransactionHistoryActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_settings) {
-
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, WelcomeScreenActivity.class);

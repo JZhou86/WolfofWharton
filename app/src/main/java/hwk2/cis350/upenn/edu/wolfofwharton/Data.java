@@ -27,7 +27,6 @@ public class Data {
     public Data(Stock stock) {
         this.stockName = stock.getName();
         this.numShares = stock.getNumShares();
-        // CHANGE PRICE_CHANGE
         this.origPrice = stock.getPrice();
         this.currPrice = httpRequest();
         this.priceChange = truncateDecimal(((this.currPrice - this.origPrice) / this.origPrice)

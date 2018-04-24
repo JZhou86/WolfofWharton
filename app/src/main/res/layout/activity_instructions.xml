@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#2d3436"
     android:layout_height="match_parent"
     tools:context="hwk2.cis350.upenn.edu.wolfofwharton.InstructionsActivity">
 
@@ -10,24 +11,47 @@
         android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
         android:text="Instructions"
+        android:textColor="#ecf0f1"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.136" />
 
 
     <TextView
         android:id="@+id/instr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click on the search icon on the main page to \nsearch for a stock. Buy and sell stocks in your \n portfolio using your initial $100,000 of buying \npower. Use the menu to toggle between \ntransaction history, watchlist, portfolio, and log\n out."
-
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:text="Click on the search icon on the main page to search for a stock. Buy and sell stocks in your portfolio using your initial $100,000 of buying power. Use the menu to toggle between transaction history, watchlist, portfolio, and log out."
+        android:textColor="#ecf0f1"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageWolf"
+        android:layout_width="45dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401" />
+        app:layout_constraintVertical_bias="0.776"
+        app:srcCompat="@drawable/wolf" />
 
 </android.support.constraint.ConstraintLayout>

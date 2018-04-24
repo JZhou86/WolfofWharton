@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2d3436"
     tools:context="hwk2.cis350.upenn.edu.wolfofwharton.TickerSearchActivity">
 
     <EditText
@@ -18,7 +19,8 @@
         android:cursorVisible="false"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter a ticker"
+        android:hint="ENTER A TICKER"
+        android:textColorHint="#2d3436"
         android:inputType="textCapWords"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
